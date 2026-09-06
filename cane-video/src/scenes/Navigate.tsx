@@ -63,7 +63,7 @@ export const Navigate: React.FC<{ duration: number }> = ({ duration }) => {
         <svg width={width} height={height} style={{ position: "absolute", inset: 0 }}>
           <g opacity={mapIn} transform={`translate(0 ${(1 - mapIn) * 20})`}>
             <rect x={map.x} y={map.y} width={map.w} height={map.h} rx={18} fill="#fff" stroke={theme.panelBorder} strokeWidth={1.5} style={{ filter: "drop-shadow(0 16px 40px rgba(15,27,45,0.10))" }} />
-            <text x={map.x + 28} y={map.y + 40} fontFamily={theme.mono} fontSize={14} letterSpacing={2} fill={theme.blue}>KAKAO ROUTE · 도보 경로 · 총 거리 392 m · 예상 6분</text>
+            <text x={map.x + 28} y={map.y + 40} fontFamily={theme.mono} fontSize={14} letterSpacing={2} fill={theme.blue}>KAKAO ROUTE · 392 m · 6분</text>
             {blocks.map((b, i) => (
               <rect key={i} x={map.x + b.x} y={map.y + b.y} width={b.w} height={b.h} rx={8} fill={theme.bg} stroke={theme.line} strokeWidth={1.5} />
             ))}
@@ -99,9 +99,9 @@ export const Navigate: React.FC<{ duration: number }> = ({ duration }) => {
           const end = i < navigateSteps.length - 1 ? Math.round(stepFrames[i + 1]) : EXPLAIN;
           const o = interpolate(frame, [at, at + 10, Math.max(at + 11, end - 8), Math.max(at + 12, end)], [0, 1, 1, 0], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
           return (
-            <div key={s.label} style={{ position: "absolute", left: map.x, top: map.y + map.h + 22, opacity: o, display: "flex", alignItems: "center", gap: 12 }}>
+            <div key={s.label} style={{ position: "absolute", right: width - (map.x + map.w) + 24, top: map.y + 18, opacity: o, display: "flex", alignItems: "center", gap: 10 }}>
               <span style={{ background: theme.ink, color: "#fff", fontFamily: theme.mono, fontSize: 13, letterSpacing: 2, padding: "6px 10px", borderRadius: 6 }}>TTS</span>
-              <span style={{ fontSize: 24, fontWeight: 700 }}>“{s.tts}”</span>
+              <span style={{ fontSize: 20, fontWeight: 700 }}>“{s.tts}”</span>
             </div>
           );
         })}
@@ -158,10 +158,10 @@ export const Navigate: React.FC<{ duration: number }> = ({ duration }) => {
 
       {/* ── 실사 ── */}
       <Sequence from={EXPLAIN + OBST} durationInFrames={CLIP1} name="실사: 장애물 감지">
-        <VideoCard src={clips.obstacle.src} label={clips.obstacle.label} note={clips.obstacle.note} width={1500} x={(width - 1500) / 2} y={150} startFrom={75} />
+        <VideoCard src={clips.obstacle.src} label={clips.obstacle.label} note={clips.obstacle.note} width={1320} x={(width - 1320) / 2} y={140} startFrom={75} />
       </Sequence>
       <Sequence from={EXPLAIN + OBST + CLIP1} durationInFrames={duration - EXPLAIN - OBST - CLIP1} name="실사: 길안내">
-        <VideoCard src={clips.navigate.src} label={clips.navigate.label} note={clips.navigate.note} width={1500} x={(width - 1500) / 2} y={150} startFrom={22 * 30} volume={0.35} />
+        <VideoCard src={clips.navigate.src} label={clips.navigate.label} note={clips.navigate.note} width={1320} x={(width - 1320) / 2} y={140} startFrom={22 * 30} volume={0.35} />
       </Sequence>
     </AbsoluteFill>
   );

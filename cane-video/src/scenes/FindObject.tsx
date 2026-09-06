@@ -103,9 +103,9 @@ export const FindObject: React.FC<{ duration: number }> = ({ duration }) => {
           const end = i < findObjectSteps.length - 1 ? Math.round(stepFrames[i + 1]) : EXPLAIN;
           const o = interpolate(frame, [at, at + 10, Math.max(at + 11, end - 8), Math.max(at + 12, end)], [0, 1, 1, 0], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
           return (
-            <div key={s.label} style={{ position: "absolute", left: map.x, top: map.y + map.h + 22, opacity: o, display: "flex", alignItems: "center", gap: 12 }}>
+            <div key={s.label} style={{ position: "absolute", right: width - (map.x + map.w) + 24, top: map.y + 18, opacity: o, display: "flex", alignItems: "center", gap: 10 }}>
               <span style={{ background: theme.ink, color: "#fff", fontFamily: theme.mono, fontSize: 13, letterSpacing: 2, padding: "6px 10px", borderRadius: 6 }}>TTS</span>
-              <span style={{ fontSize: 24, fontWeight: 700 }}>“{s.tts}”</span>
+              <span style={{ fontSize: 20, fontWeight: 700 }}>“{s.tts}”</span>
             </div>
           );
         })}
@@ -114,7 +114,7 @@ export const FindObject: React.FC<{ duration: number }> = ({ duration }) => {
       </Sequence>
 
       <Sequence from={EXPLAIN} durationInFrames={duration - EXPLAIN} name="실사: 물건 찾기">
-        <VideoCard src={clips.findObject.src} label={clips.findObject.label} note={clips.findObject.note} width={1500} x={(width - 1500) / 2} y={150} volume={0.35} />
+        <VideoCard src={clips.findObject.src} label={clips.findObject.label} note={clips.findObject.note} width={1320} x={(width - 1320) / 2} y={140} volume={0.35} />
       </Sequence>
     </AbsoluteFill>
   );

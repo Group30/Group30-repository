@@ -10,5 +10,7 @@ for s in segs:
     subprocess.run(["edge-tts", "--voice", voice, "--text", s["text"], "--write-media", str(mp3)], check=True, capture_output=True)
     dur = float(subprocess.check_output(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", str(mp3)]).decode().strip())
     win = s["end"] - s["start"]
+    s["dur"] = round(dur, 2)
     flag = "OK " if dur <= win else "OVER"
     print(f"{flag} {s['id']:14s} {dur:5.2f}s / window {win:5.2f}s  → ends {s['start']+dur:5.2f}")
+json.dump(segs, open(root / "src/narration.json", "w", encoding="utf-8"), ensure_ascii=False, indent=2)

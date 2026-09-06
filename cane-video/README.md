@@ -38,6 +38,11 @@ npm run still -- --frame=480   # 특정 프레임 스틸 확인
 - 다른 목소리로 바꾸려면 `python3 scripts/make-vo.py ko-KR-HyunsuMultilingualNeural` 처럼 voice 인자를 주면 됩니다. 외부에서 녹음한 mp3 를 같은 id 이름으로 `public/vo/` 에 넣어도 됩니다.
 - 실사 클립 원본 소리는 35% 로 낮춰 나레이션 아래에 깔립니다 (`VideoCard volume`).
 
+## 자막
+
+- `src/components/Subtitles.tsx` 가 `narration.json` 의 `start`/`dur` 로 나레이션과 같은 타이밍에 하단 자막을 띄웁니다. 문장을 바꾸면 자막도 같이 바뀝니다.
+- `dur` 은 `scripts/make-vo.py` 가 mp3 길이를 재서 자동 기록합니다.
+
 ## 자료 교체 포인트 (`src/data.ts` 한 파일)
 
 - `product` — 제품명 · 팀명 · 공모전명 · 단체명. `caneImage: "cane.png"` 로 바꾸고 `public/cane.png` 를 넣으면 SVG 대신 실제 제품 사진 사용(가로로 눕힌 이미지, 팁이 왼쪽 · 손잡이가 오른쪽).

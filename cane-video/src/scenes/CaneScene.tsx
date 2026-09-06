@@ -88,7 +88,7 @@ export const CaneScene: React.FC<{ duration: number; revealFrames: number }> = (
       ) : (
         <>
           <div style={{ position: "absolute", left: 140, top: 150, fontFamily: theme.mono, fontSize: 19, letterSpacing: 4, color: theme.blue }}>// 02  HARDWARE</div>
-          <div style={{ position: "absolute", left: 140, top: height - 200, maxWidth: 980, color: theme.ink, fontSize: 30, lineHeight: 1.35, opacity: easeOut(prog(frame, activeStart + 40, 16)) * (1 - prog(frame, activeStart + per - 14, 12)) }}>
+          <div style={{ position: "absolute", left: 140, top: height - 250, maxWidth: 980, color: theme.ink, fontSize: 30, lineHeight: 1.35, opacity: easeOut(prog(frame, activeStart + 40, 16)) * (1 - prog(frame, activeStart + per - 14, 12)) }}>
             <span style={{ display: "inline-block", width: 34, height: 3, background: theme.blue, verticalAlign: "middle", marginRight: 14 }} />
             {active.desc}
           </div>
