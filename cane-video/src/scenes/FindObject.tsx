@@ -11,7 +11,7 @@ import { TypeText } from "../components/TypeText";
 
 const EXPLAIN = 300; // 10s 설명 애니메이션
 
-/** 32–55s: 사용 1 · 물건 찾기(휴대폰) — 방 미니맵 경로 + 진동 인셋 → 실사 클립 */
+/** 32–55s: 사용 1 · 물건 찾기(의자) — 방 미니맵 경로 + 진동 인셋 → 실사 클립 */
 export const FindObject: React.FC<{ duration: number }> = ({ duration }) => {
   const frame = useCurrentFrame();
   const { fps, width, height } = useVideoConfig();
@@ -25,7 +25,7 @@ export const FindObject: React.FC<{ duration: number }> = ({ duration }) => {
     { x: map.x + 620, y: map.y + 300 },
     { x: map.x + 620, y: map.y + 150 },
   ];
-  const phone = { x: map.x + 620, y: map.y + 92 };
+  const chair = { x: map.x + 620, y: map.y + 92 };
   const sched = walkSchedule(path, 70, 34, 34); // 정지 34f → 이동 34f × 3구간, 도착 ≈ 274
   const walkStart = sched.starts[0];
   const walker = pointAt(path, sched.tAt(frame));
@@ -45,7 +45,7 @@ export const FindObject: React.FC<{ duration: number }> = ({ duration }) => {
         <div style={{ position: "absolute", left: 140, top: 150 }}>
           <div style={{ fontFamily: theme.mono, fontSize: 19, letterSpacing: 4, color: theme.blue }}>// 03  USE CASE 1 · 물건 찾기</div>
           <div style={{ fontSize: 48, fontWeight: 800, marginTop: 8 }}>
-            <TypeText text="“휴대폰 찾아 줘” — 말하면, 진동이 방향을 알려줍니다." start={6} fps={fps} cps={18} />
+            <TypeText text="“의자 찾아 줘” — 말하면, 진동이 방향을 알려줍니다." start={6} fps={fps} cps={18} />
           </div>
         </div>
 
@@ -53,19 +53,21 @@ export const FindObject: React.FC<{ duration: number }> = ({ duration }) => {
           {/* 미니맵 카드 */}
           <g opacity={mapIn} transform={`translate(0 ${(1 - mapIn) * 20})`}>
             <rect x={map.x} y={map.y} width={map.w} height={map.h} rx={18} fill="#fff" stroke={theme.panelBorder} strokeWidth={1.5} style={{ filter: "drop-shadow(0 16px 40px rgba(15,27,45,0.10))" }} />
-            <text x={map.x + 28} y={map.y + 40} fontFamily={theme.mono} fontSize={14} letterSpacing={2} fill={theme.blue}>ROOM MAP · 사용자 위치 → 휴대폰 위치</text>
+            <text x={map.x + 28} y={map.y + 40} fontFamily={theme.mono} fontSize={14} letterSpacing={2} fill={theme.blue}>ROOM MAP · 사용자 위치 → 의자 위치</text>
             {furniture.map((f) => (
               <g key={f.label}>
                 <rect x={map.x + f.x} y={map.y + f.y + 30} width={f.w} height={f.h} rx={10} fill={theme.bg} stroke={theme.line} strokeWidth={1.5} />
                 <text x={map.x + f.x + f.w / 2} y={map.y + f.y + 30 + f.h / 2 + 6} textAnchor="middle" fontSize={16} fill={theme.grey} fontWeight={600}>{f.label}</text>
               </g>
             ))}
-            {/* 휴대폰 */}
-            <g transform={`translate(${phone.x} ${phone.y})`}>
-              <circle r={26 + 14 * ((frame % 40) / 40)} fill="none" stroke={theme.blue} strokeWidth={2} opacity={1 - (frame % 40) / 40} />
-              <rect x={-14} y={-22} width={28} height={44} rx={6} fill={theme.ink} />
-              <rect x={-10} y={-17} width={20} height={30} rx={2} fill={theme.blue} />
-              <text y={46} textAnchor="middle" fontSize={15} fontWeight={700} fill={theme.blue}>휴대폰</text>
+            {/* 의자 (목표 객체) */}
+            <g transform={`translate(${chair.x} ${chair.y})`}>
+              <circle r={28 + 14 * ((frame % 40) / 40)} fill="none" stroke={theme.blue} strokeWidth={2} opacity={1 - (frame % 40) / 40} />
+              <rect x={-16} y={-24} width={32} height={14} rx={4} fill={theme.blue} />
+              <rect x={-18} y={-8} width={36} height={12} rx={4} fill={theme.ink} />
+              <rect x={-15} y={4} width={4} height={16} fill={theme.ink} />
+              <rect x={11} y={4} width={4} height={16} fill={theme.ink} />
+              <text y={42} textAnchor="middle" fontSize={15} fontWeight={700} fill={theme.blue}>의자</text>
             </g>
             {/* 경로 */}
             <path d={toD(path)} fill="none" stroke={theme.line} strokeWidth={6} strokeLinecap="round" strokeLinejoin="round" strokeDasharray="2 14" />
@@ -108,7 +110,7 @@ export const FindObject: React.FC<{ duration: number }> = ({ duration }) => {
           );
         })}
 
-        <AppFlow x={1100} y={250} width={680} start={10} voice="휴대폰 찾아 줘" intent="물건 찾기 · find_object" target="cell phone" action="YOLOv8n 탐지 → 3×3 방향 판단 → 진동 · TTS" />
+        <AppFlow x={1100} y={250} width={680} start={10} voice="의자 찾아 줘" intent="물건 찾기 · find_object" target="chair" action="YOLOv8n 탐지 → 3×3 방향 판단 → 진동 · TTS" />
       </Sequence>
 
       <Sequence from={EXPLAIN} durationInFrames={duration - EXPLAIN} name="실사: 물건 찾기">

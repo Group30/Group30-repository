@@ -99,12 +99,12 @@ export const features: Feature[] = [
 export type MotorId = "up" | "down" | "left" | "right";
 export const motorLabel: Record<MotorId, string> = { up: "위쪽", down: "아래쪽", left: "왼쪽", right: "오른쪽" };
 
-/** 사용 시나리오 1: 물건 찾기 (휴대폰) — 방 안 미니맵 경로 */
+/** 사용 시나리오 1: 물건 찾기 (의자) — 방 안 미니맵 경로 */
 export const findObjectSteps: { label: string; motors: MotorId[]; tts: string }[] = [
-  { label: "직진", motors: ["up"], tts: "휴대폰이 앞쪽에 있습니다" },
+  { label: "직진", motors: ["up"], tts: "의자가 앞쪽에 있습니다" },
   { label: "오른쪽", motors: ["right"], tts: "오른쪽으로 이동하세요" },
-  { label: "직진", motors: ["up"], tts: "휴대폰이 앞쪽에 있습니다" },
-  { label: "정면 도착", motors: ["up", "down", "left", "right"], tts: "휴대폰이 정면에 있습니다" },
+  { label: "직진", motors: ["up"], tts: "의자가 앞쪽에 있습니다" },
+  { label: "정면 도착", motors: ["up", "down", "left", "right"], tts: "의자가 정면에 있습니다" },
 ];
 
 /** 사용 시나리오 2: 길안내 — 카카오 경로 */
@@ -136,7 +136,7 @@ export const timeline = {
 
 /** 실사 클립 (public/clips) — 초안 영상에서 잘라낸 구간 */
 export const clips = {
-  findObject: { src: "clips/find_object.mp4", label: "실제 사용 영상 · 물건 찾기", note: "초안: “의자 찾아 줘” → 최종본은 휴대폰 찾기 촬영본으로 교체" },
+  findObject: { src: "clips/find_object.mp4", label: "실제 사용 영상 · 물건 찾기", note: "“의자 찾아 줘” · YOLOv8n chair 탐지 → 방향 진동 · TTS" },
   obstacle: { src: "clips/obstacle.mp4", label: "실제 사용 영상 · 장애물 위험 감지", note: "정면 위험 감지 · 감지 거리 89~127 cm" },
   navigate: { src: "clips/navigate.mp4", label: "실제 사용 영상 · 길안내", note: "카카오 경로 · 직진 / 우회전 진동" },
 };
