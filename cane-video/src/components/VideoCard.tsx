@@ -1,5 +1,6 @@
 import React from "react";
-import { OffthreadVideo, staticFile, useCurrentFrame } from "remotion";
+import { OffthreadVideo, staticFile, useCurrentFrame, useVideoConfig } from "remotion";
+import { duckAt } from "../ui/duck";
 import { theme } from "../theme";
 import { easeOut, prog } from "../ui/anim";
 
@@ -14,8 +15,12 @@ export const VideoCard: React.FC<{
   start?: number;
   startFrom?: number;
   volume?: number;
-}> = ({ src, label, note, width, x, y, start = 0, startFrom = 0, volume = 1 }) => {
+  /** 이 카드가 시작되는 절대 시간(초). 주면 나레이션 구간에서 클립 소리를 0.04 로 덕킹 */
+  absStartSec?: number;
+}> = ({ src, label, note, width, x, y, start = 0, startFrom = 0, volume = 1, absStartSec }) => {
   const frame = useCurrentFrame();
+  const { fps } = useVideoConfig();
+  const vol = absStartSec === undefined ? volume : (f: number) => volume + (0.04 - volume) * duckAt(absStartSec + f / fps);
   const inP = easeOut(prog(frame, start, 16));
   const h = (width * 9) / 16;
   return (
@@ -26,7 +31,7 @@ export const VideoCard: React.FC<{
         {note ? <span style={{ fontSize: 17, color: theme.grey, marginLeft: "auto" }}>{note}</span> : null}
       </div>
       <div style={{ width, height: h, borderRadius: 14, overflow: "hidden", background: "#000", border: `2px solid ${theme.panelBorder}`, boxShadow: "0 20px 50px rgba(15,27,45,0.18)", position: "relative" }}>
-        <OffthreadVideo src={staticFile(src)} startFrom={startFrom} volume={volume} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+        <OffthreadVideo src={staticFile(src)} startFrom={startFrom} volume={vol} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
         {/* 코너 브래킷 */}
         {[
           [0, 0, 1, 1],

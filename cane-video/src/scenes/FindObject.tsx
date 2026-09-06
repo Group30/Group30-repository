@@ -1,7 +1,7 @@
 import React from "react";
 import { AbsoluteFill, Sequence, useCurrentFrame, useVideoConfig, interpolate } from "remotion";
 import { theme } from "../theme";
-import { clips, findObjectSteps } from "../data";
+import { clips, findObjectSteps, timeline } from "../data";
 import { fadeInOut, easeOut, prog } from "../ui/anim";
 import { pointAt, toD, walkSchedule, type Pt } from "../ui/path";
 import { AppFlow } from "../components/AppFlow";
@@ -114,7 +114,7 @@ export const FindObject: React.FC<{ duration: number }> = ({ duration }) => {
       </Sequence>
 
       <Sequence from={EXPLAIN} durationInFrames={duration - EXPLAIN} name="실사: 물건 찾기">
-        <VideoCard src={clips.findObject.src} label={clips.findObject.label} note={clips.findObject.note} width={1320} x={(width - 1320) / 2} y={140} volume={0.35} />
+        <VideoCard src={clips.findObject.src} label={clips.findObject.label} note={clips.findObject.note} width={1320} x={(width - 1320) / 2} y={140} volume={0.55} absStartSec={timeline.findObject[0] + EXPLAIN / fps} />
       </Sequence>
     </AbsoluteFill>
   );

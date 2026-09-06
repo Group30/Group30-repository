@@ -36,7 +36,7 @@ npm run still -- --frame=480   # 특정 프레임 스틸 확인
 - 대본·타이밍: `src/narration.json` (id · start/end 초 · text). `Main.tsx` 가 이 파일을 읽어 `<Audio>` 로 배치합니다.
 - 음성 생성: `python3 scripts/make-vo.py` → `public/vo/<id>.mp3` (Edge TTS `ko-KR-InJoonNeural`, 원음 속도). 각 문장이 구간(window) 안에 들어가는지 길이를 출력합니다. `pip install edge-tts` 필요.
 - 다른 목소리로 바꾸려면 `python3 scripts/make-vo.py ko-KR-HyunsuMultilingualNeural` 처럼 voice 인자를 주면 됩니다. 외부에서 녹음한 mp3 를 같은 id 이름으로 `public/vo/` 에 넣어도 됩니다.
-- 실사 클립 원본 소리는 35% 로 낮춰 나레이션 아래에 깔립니다 (`VideoCard volume`).
+- 실사 클립 원본 소리(앱 TTS 등)는 기본 55%, 나레이션 중에는 4% 로 자동 덕킹됩니다 (`VideoCard absStartSec` + `src/ui/duck.ts`). BGM 도 같은 구간 정보를 씁니다.
 
 ## 자막
 

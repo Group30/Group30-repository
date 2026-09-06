@@ -1,7 +1,7 @@
 import React from "react";
 import { AbsoluteFill, Sequence, useCurrentFrame, useVideoConfig, interpolate } from "remotion";
 import { theme } from "../theme";
-import { clips, navigateSteps, type MotorId } from "../data";
+import { clips, navigateSteps, timeline, type MotorId } from "../data";
 import { fadeInOut, easeOut, prog } from "../ui/anim";
 import { pointAt, toD, walkSchedule, type Pt } from "../ui/path";
 import { NavPanel } from "../components/NavPanel";
@@ -158,10 +158,10 @@ export const Navigate: React.FC<{ duration: number }> = ({ duration }) => {
 
       {/* ── 실사 ── */}
       <Sequence from={EXPLAIN + OBST} durationInFrames={CLIP1} name="실사: 장애물 감지">
-        <VideoCard src={clips.obstacle.src} label={clips.obstacle.label} note={clips.obstacle.note} width={1320} x={(width - 1320) / 2} y={140} startFrom={75} />
+        <VideoCard src={clips.obstacle.src} label={clips.obstacle.label} note={clips.obstacle.note} width={1320} x={(width - 1320) / 2} y={140} startFrom={75} volume={0.55} absStartSec={timeline.navigate[0] + (EXPLAIN + OBST) / fps} />
       </Sequence>
       <Sequence from={EXPLAIN + OBST + CLIP1} durationInFrames={duration - EXPLAIN - OBST - CLIP1} name="실사: 길안내">
-        <VideoCard src={clips.navigate.src} label={clips.navigate.label} note={clips.navigate.note} width={1320} x={(width - 1320) / 2} y={140} startFrom={22 * 30} volume={0.35} />
+        <VideoCard src={clips.navigate.src} label={clips.navigate.label} note={clips.navigate.note} width={1320} x={(width - 1320) / 2} y={140} startFrom={22 * 30} volume={0.55} absStartSec={timeline.navigate[0] + (EXPLAIN + OBST + CLIP1) / fps} />
       </Sequence>
     </AbsoluteFill>
   );
