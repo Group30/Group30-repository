@@ -43,7 +43,7 @@ export const AppFlow: React.FC<{
             {listening ? "🎤" : "■"}
           </div>
         </div>
-        <div style={{ fontSize: 14, color: theme.grey }}>{listening ? "듣고 있어요 — 말씀하신 내용을 듣고 있습니다." : "듣기 종료 — 의도를 분석합니다."}</div>
+        <div style={{ fontSize: 14, color: theme.grey }}>{listening ? "듣고 있어요. 말씀하신 내용을 듣고 있습니다." : "듣기 종료. 의도를 분석합니다."}</div>
       </div>
       <div style={{ marginTop: 18, display: "flex", flexDirection: "column", gap: 10 }}>
         {rows.map((r) => {

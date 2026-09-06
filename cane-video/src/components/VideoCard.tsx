@@ -26,7 +26,7 @@ export const VideoCard: React.FC<{
   return (
     <div style={{ position: "absolute", left: x, top: y, width, opacity: inP, transform: `translateY(${(1 - inP) * 30}px)`, fontFamily: theme.font }}>
       <div style={{ display: "flex", alignItems: "center", gap: 14, marginBottom: 14 }}>
-        <span style={{ background: theme.red, color: "#fff", fontFamily: theme.mono, fontSize: 14, letterSpacing: 2, padding: "6px 12px", borderRadius: 4 }}>● LIVE</span>
+        <span style={{ background: theme.red, color: "#fff", fontFamily: theme.mono, fontSize: 14, letterSpacing: 2, padding: "6px 12px", borderRadius: 4 }}>실제 촬영</span>
         <span style={{ fontSize: 26, fontWeight: 800, color: theme.ink }}>{label}</span>
         {note ? <span style={{ fontSize: 17, color: theme.grey, marginLeft: "auto" }}>{note}</span> : null}
       </div>

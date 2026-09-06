@@ -69,15 +69,13 @@ export const Callout: React.FC<{
           y={boxY}
           width={BOX_W * box}
           height={BOX_H}
-          rx={6}
+          rx={14}
           fill={theme.panel}
           stroke={theme.panelBorder}
           strokeWidth={1.5}
           style={{ filter: "drop-shadow(0 10px 24px rgba(15,27,45,0.12))" }}
         />
-        <path d={`M ${boxX} ${boxY + 26} L ${boxX} ${boxY} L ${boxX + 26} ${boxY}`} fill="none" stroke={theme.blue} strokeWidth={3} />
-        <path d={`M ${boxX + BOX_W} ${boxY + BOX_H - 26} L ${boxX + BOX_W} ${boxY + BOX_H} L ${boxX + BOX_W - 26} ${boxY + BOX_H}`} fill="none" stroke={theme.blue} strokeWidth={3} />
-        <rect x={side > 0 ? boxX : boxX + BOX_W - 4} y={boxY} width={4} height={BOX_H} fill={theme.blue} />
+        <rect x={side > 0 ? boxX + 10 : boxX + BOX_W - 15} y={boxY + 16} width={5} height={BOX_H - 32} rx={2.5} fill={theme.blue} />
         <foreignObject x={boxX + 24} y={boxY + 14} width={BOX_W - 48} height={BOX_H - 24}>
           <div style={{ fontFamily: theme.font, color: theme.ink, lineHeight: 1.2 }}>
             <div style={{ fontFamily: theme.mono, fontSize: 14, letterSpacing: 2, color: theme.blue }}>

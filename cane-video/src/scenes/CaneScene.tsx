@@ -79,15 +79,13 @@ export const CaneScene: React.FC<{ duration: number; revealFrames: number }> = (
 
       {!active ? (
         <div style={{ position: "absolute", left: 140, top: 150, color: theme.ink, opacity: interpolate(frame, [16, 36, revealFrames - 16, revealFrames], [0, 1, 1, 0], { extrapolateLeft: "clamp", extrapolateRight: "clamp" }) }}>
-          <div style={{ fontFamily: theme.mono, fontSize: 19, letterSpacing: 4, color: theme.blue }}>// 01  DEVICE</div>
           <div style={{ fontSize: 56, fontWeight: 800, marginTop: 10 }}>
-            <TypeText text="보고, 재고, 진동으로 알려주는 지팡이." start={24} fps={fps} cps={16} />
+            <TypeText text="앞을 보고, 거리를 재고, 진동으로 알립니다." start={24} fps={fps} cps={16} />
           </div>
           <div style={{ fontSize: 26, color: theme.ink2, marginTop: 10, opacity: focusP }}>손잡이 모듈 하나에 카메라 · ToF 센서 8개 · Raspberry Pi 5 · 4방향 진동모터.</div>
         </div>
       ) : (
         <>
-          <div style={{ position: "absolute", left: 140, top: 150, fontFamily: theme.mono, fontSize: 19, letterSpacing: 4, color: theme.blue }}>// 02  HARDWARE</div>
           <div style={{ position: "absolute", left: 140, top: height - 250, maxWidth: 980, color: theme.ink, fontSize: 30, lineHeight: 1.35, opacity: easeOut(prog(frame, activeStart + 40, 16)) * (1 - prog(frame, activeStart + per - 14, 12)) }}>
             <span style={{ display: "inline-block", width: 34, height: 3, background: theme.blue, verticalAlign: "middle", marginRight: 14 }} />
             {active.desc}

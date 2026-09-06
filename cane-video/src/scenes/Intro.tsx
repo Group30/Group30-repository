@@ -27,7 +27,6 @@ export const Intro: React.FC<{ duration: number }> = ({ duration }) => {
         ))}
       </div>
       <div style={{ position: "absolute", left: 0, right: 0, top: height * 0.36, textAlign: "center", transform: `translateY(${(1 - titleIn) * 40}px)`, opacity: titleIn }}>
-        <div style={{ fontFamily: theme.mono, fontSize: 22, letterSpacing: 8, color: theme.blue, marginBottom: 16 }}>AI SMART CANE · {product.org}</div>
         <div style={{ fontSize: 150, fontWeight: 900, letterSpacing: -4, color: theme.ink, lineHeight: 1 }}>
           Smart<span style={{ color: theme.blue }}>Cane</span>
         </div>
@@ -35,8 +34,8 @@ export const Intro: React.FC<{ duration: number }> = ({ duration }) => {
           <TypeText text={product.nameKo} start={74} fps={fps} cps={20} />
         </div>
       </div>
-      <div style={{ position: "absolute", bottom: 120, left: 0, right: 0, textAlign: "center", fontFamily: theme.mono, fontSize: 19, letterSpacing: 4, color: theme.grey, opacity: tagIn }}>
-        {product.contest} · {product.team}
+      <div style={{ position: "absolute", bottom: 175, left: 0, right: 0, textAlign: "center", fontFamily: theme.mono, fontSize: 19, letterSpacing: 4, color: theme.grey, opacity: tagIn }}>
+        {product.team} · {product.org} · {product.contest}
       </div>
     </AbsoluteFill>
   );

@@ -19,7 +19,7 @@ export const Navigate: React.FC<{ duration: number }> = ({ duration }) => {
   const { fps, width, height } = useVideoConfig();
   const op = fadeInOut(frame, duration, 10, 14);
 
-  const map = { x: 120, y: 250, w: 900, h: 660 };
+  const map = { x: 120, y: 250, w: 1680, h: 660 }; // 풀폭 지도, 앱 패널은 우측 오버레이
   const path: Pt[] = [
     { x: map.x + 120, y: map.y + 580 },
     { x: map.x + 120, y: map.y + 330 },
@@ -39,7 +39,7 @@ export const Navigate: React.FC<{ duration: number }> = ({ duration }) => {
 
   // 도로 블록 (간략 지도)
   const blocks: { x: number; y: number; w: number; h: number }[] = [];
-  for (let r = 0; r < 3; r++) for (let c = 0; c < 3; c++) blocks.push({ x: 40 + c * 300, y: 60 + r * 210, w: 220, h: 150 });
+  for (let r = 0; r < 3; r++) for (let c = 0; c < 4; c++) blocks.push({ x: 40 + c * 300, y: 60 + r * 210, w: 220, h: 150 });
 
   // ── 장애물 감지 파트 (로컬 프레임 = frame - EXPLAIN) ──
   const ot = frame - EXPLAIN;
@@ -55,15 +55,15 @@ export const Navigate: React.FC<{ duration: number }> = ({ duration }) => {
       {/* ── 길안내 설명 ── */}
       <Sequence from={0} durationInFrames={EXPLAIN} name="설명: 길안내">
         <div style={{ position: "absolute", left: 140, top: 150 }}>
-          <div style={{ fontFamily: theme.mono, fontSize: 19, letterSpacing: 4, color: theme.blue }}>// 04  USE CASE 2 · 길안내</div>
+          <div style={{ fontFamily: theme.mono, fontSize: 19, letterSpacing: 4, color: theme.blue }}>길안내</div>
           <div style={{ fontSize: 48, fontWeight: 800, marginTop: 8 }}>
-            <TypeText text="“근처 편의점으로 안내해 줘” — 카카오 경로를 진동으로." start={6} fps={fps} cps={18} />
+            <TypeText text="“근처 편의점으로 안내해 줘” 카카오 경로를 진동으로 안내합니다." start={6} fps={fps} cps={18} />
           </div>
         </div>
         <svg width={width} height={height} style={{ position: "absolute", inset: 0 }}>
           <g opacity={mapIn} transform={`translate(0 ${(1 - mapIn) * 20})`}>
             <rect x={map.x} y={map.y} width={map.w} height={map.h} rx={18} fill="#fff" stroke={theme.panelBorder} strokeWidth={1.5} style={{ filter: "drop-shadow(0 16px 40px rgba(15,27,45,0.10))" }} />
-            <text x={map.x + 28} y={map.y + 40} fontFamily={theme.mono} fontSize={14} letterSpacing={2} fill={theme.blue}>KAKAO ROUTE · 392 m · 6분</text>
+            <text x={map.x + 28} y={map.y + 40} fontFamily={theme.mono} fontSize={14} letterSpacing={2} fill={theme.blue}>KAKAO ROUTE · 도보 경로 (예시)</text>
             {blocks.map((b, i) => (
               <rect key={i} x={map.x + b.x} y={map.y + b.y} width={b.w} height={b.h} rx={8} fill={theme.bg} stroke={theme.line} strokeWidth={1.5} />
             ))}
@@ -99,19 +99,18 @@ export const Navigate: React.FC<{ duration: number }> = ({ duration }) => {
           const end = i < navigateSteps.length - 1 ? Math.round(stepFrames[i + 1]) : EXPLAIN;
           const o = interpolate(frame, [at, at + 10, Math.max(at + 11, end - 8), Math.max(at + 12, end)], [0, 1, 1, 0], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
           return (
-            <div key={s.label} style={{ position: "absolute", right: width - (map.x + map.w) + 24, top: map.y + 18, opacity: o, display: "flex", alignItems: "center", gap: 10 }}>
+            <div key={s.label} style={{ position: "absolute", left: map.x + 28, top: map.y + map.h - 56, opacity: o, display: "flex", alignItems: "center", gap: 10 }}>
               <span style={{ background: theme.ink, color: "#fff", fontFamily: theme.mono, fontSize: 13, letterSpacing: 2, padding: "6px 10px", borderRadius: 6 }}>TTS</span>
               <span style={{ fontSize: 20, fontWeight: 700 }}>“{s.tts}”</span>
             </div>
           );
         })}
-        <NavPanel x={1100} y={250} width={680} start={10} dest="근처 편의점 (카카오 API 검색)" total="총 거리 392 m / 예상 시간 6분" guide={cur ? cur.tts : "경로를 검색하고 있습니다."} dist={cur ? cur.dist : "—"} motors={cur ? cur.motors : []} />
+        <NavPanel x={1300} y={275} width={470} start={10} dest="근처 편의점 (카카오 API 검색)" total="총 거리 · 예상 시간 (예시)" guide={cur ? cur.tts : "경로를 검색하고 있습니다."} dist={cur ? cur.dist : "—"} motors={cur ? cur.motors : []} />
       </Sequence>
 
       {/* ── 장애물 위험 감지 ── */}
       <Sequence from={EXPLAIN} durationInFrames={OBST} name="설명: 장애물 감지">
         <div style={{ position: "absolute", left: 140, top: 150, opacity: obstIn }}>
-          <div style={{ fontFamily: theme.mono, fontSize: 19, letterSpacing: 4, color: theme.red}}>// 04+  ALWAYS-ON · 장애물 위험 감지</div>
           <div style={{ fontSize: 48, fontWeight: 800, marginTop: 8 }}>길안내 중에도, ToF 센서 8개는 항상 앞을 봅니다.</div>
         </div>
         <svg width={width} height={height} style={{ position: "absolute", inset: 0, opacity: obstIn }}>
@@ -119,7 +118,7 @@ export const Navigate: React.FC<{ duration: number }> = ({ duration }) => {
             <rect width={map.w} height={map.h} rx={18} fill="#fff" stroke={theme.panelBorder} strokeWidth={1.5} style={{ filter: "drop-shadow(0 16px 40px rgba(15,27,45,0.10))" }} />
             <text x={28} y={40} fontFamily={theme.mono} fontSize={14} letterSpacing={2} fill={theme.red}>ToF ×8 · 상시 반복 측정 (왼 1 · 정면 3 · 오른 1 · 위 3)</text>
             {/* 위에서 본 사용자 + 지팡이 모듈 */}
-            <g transform={`translate(${map.w - 200} ${map.h / 2})`}>
+            <g transform={`translate(${map.w - 560} ${map.h / 2})`}>
               <circle r={34} fill={theme.bg} stroke={theme.grey} strokeWidth={2} />
               <text y={6} textAnchor="middle" fontSize={15} fontWeight={700} fill={theme.grey}>사용자</text>
               <rect x={-110} y={-18} width={70} height={36} rx={8} fill="#1c2430" />
@@ -151,9 +150,9 @@ export const Navigate: React.FC<{ duration: number }> = ({ duration }) => {
               <text x={22} y={80} fontSize={18} fill={theme.ink2}>거리별 {vibCount}회 진동 + TTS 경고 · 물건 찾기 · 길안내보다 우선 처리</text>
             </g>
           </g>
-          <GripZoom x={map.x + map.w - 200} y={map.y + 150} from={{ x: map.x + map.w - 200, y: map.y + map.h / 2 - 34 }} motors={obstMotors} start={EXPLAIN + 62} label={`위험 방향 · ${vibCount}회 진동`} />
+          <GripZoom x={map.x + map.w - 560} y={map.y + 150} from={{ x: map.x + map.w - 560, y: map.y + map.h / 2 - 34 }} motors={obstMotors} start={EXPLAIN + 62} label={`위험 방향 · ${vibCount}회 진동`} />
         </svg>
-        <NavPanel x={1100} y={250} width={680} start={0} dest="근처 편의점 (카카오 API 검색)" total="총 거리 392 m / 예상 시간 6분" guide="현재 방향 그대로 직진하세요" dist="90 m" motors={obstMotors} warning={dangerP > 0 ? `정면 위험 감지 · 감지 거리 정면 ${distCm} cm` : undefined} />
+        <NavPanel x={1300} y={275} width={470} start={0} dest="근처 편의점 (카카오 API 검색)" total="총 거리 · 예상 시간 (예시)" guide="현재 방향 그대로 직진하세요" dist="90 m" motors={obstMotors} warning={dangerP > 0 ? `정면 위험 감지 · 감지 거리 정면 ${distCm} cm` : undefined} />
       </Sequence>
 
       {/* ── 실사 ── */}

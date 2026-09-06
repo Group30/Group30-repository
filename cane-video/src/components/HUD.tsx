@@ -32,7 +32,7 @@ export const HUD: React.FC<{ opacity?: number }> = ({ opacity = 1 }) => {
       <div style={{ position: "absolute", left: m + 90, top: m + 12, ...mono }}>
         {product.name.toUpperCase()} // {product.version}
       </div>
-      <div style={{ position: "absolute", right: m + 90, top: m + 12, ...mono }}>REC ● {tc}</div>
+      <div style={{ position: "absolute", right: m + 90, top: m + 12, ...mono }}>TC {tc}</div>
       <div style={{ position: "absolute", left: m + 90, bottom: m + 22, width: width - (m + 90) * 2 - 200, height: 2, background: theme.line }}>
         <div style={{ width: `${progress * 100}%`, height: "100%", background: theme.blue, boxShadow: `0 0 8px ${theme.cyan}` }} />
       </div>

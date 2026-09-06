@@ -43,9 +43,9 @@ export const FindObject: React.FC<{ duration: number }> = ({ duration }) => {
     <AbsoluteFill style={{ opacity: op, fontFamily: theme.font, color: theme.ink }}>
       <Sequence from={0} durationInFrames={EXPLAIN} name="설명 애니메이션">
         <div style={{ position: "absolute", left: 140, top: 150 }}>
-          <div style={{ fontFamily: theme.mono, fontSize: 19, letterSpacing: 4, color: theme.blue }}>// 03  USE CASE 1 · 물건 찾기</div>
+          <div style={{ fontFamily: theme.mono, fontSize: 19, letterSpacing: 4, color: theme.blue }}>물건 찾기</div>
           <div style={{ fontSize: 48, fontWeight: 800, marginTop: 8 }}>
-            <TypeText text="“의자 찾아 줘” — 말하면, 진동이 방향을 알려줍니다." start={6} fps={fps} cps={18} />
+            <TypeText text="“의자 찾아 줘” 한마디면, 진동이 방향을 알려줍니다." start={6} fps={fps} cps={18} />
           </div>
         </div>
 

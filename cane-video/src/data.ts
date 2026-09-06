@@ -32,7 +32,7 @@ export const product = {
 export const features: Feature[] = [
   {
     id: "camera",
-    code: "HW-01 // PI CAMERA 3 WIDE",
+    code: "PI CAMERA 3 WIDE",
     title: "광각 카메라",
     sub: "YOLOv8n 실시간 객체 탐지",
     desc: "카메라 영상을 Raspberry Pi 5가 YOLOv8n으로 분석해 찾는 물건의 위치를 3×3 영역으로 판단합니다.",
@@ -45,7 +45,7 @@ export const features: Feature[] = [
   },
   {
     id: "tof",
-    code: "HW-02 // ToF SENSOR ×8",
+    code: "ToF SENSOR ×8",
     title: "ToF 거리 센서 8개",
     sub: "왼쪽 1 · 정면 3 · 오른쪽 1 · 위쪽 3",
     desc: "8개 ToF 센서가 상시 장애물 거리를 측정하고, 위험 시 거리별로 1~3회 진동과 TTS로 경고합니다.",
@@ -58,7 +58,7 @@ export const features: Feature[] = [
   },
   {
     id: "motor",
-    code: "HW-03 // VIBRATION MOTOR ×4",
+    code: "VIBRATION MOTOR ×4",
     title: "4방향 진동모터",
     sub: "위 · 아래 · 왼쪽 · 오른쪽",
     desc: "방향에 따라 4개 모터를 단독 또는 복합으로 작동합니다. 대각선은 인접한 2개, 정면은 4개 동시 진동.",
@@ -71,7 +71,7 @@ export const features: Feature[] = [
   },
   {
     id: "core",
-    code: "HW-04 // RASPBERRY PI 5 + POWER",
+    code: "RASPBERRY PI 5 + POWER",
     title: "Raspberry Pi 5 코어",
     sub: "X120x 전원 관리 모듈 · 배터리 팩",
     desc: "객체 탐지·거리 판단·모터 제어를 처리하고, 배터리·CPU·팬 상태를 약 5초마다 앱으로 전송합니다.",
@@ -84,7 +84,7 @@ export const features: Feature[] = [
   },
   {
     id: "ble",
-    code: "HW-05 // BLE ↔ SMARTPHONE APP",
+    code: "BLE ↔ SMARTPHONE APP",
     title: "BLE 앱 연동",
     sub: "STT · Gemini 의도 분석 · 카카오 API · TTS",
     desc: "스마트폰 앱이 음성을 인식해 의도를 분석하고, BLE로 명령·결과·상태를 지팡이와 주고받습니다.",
@@ -113,7 +113,7 @@ export const navigateSteps: { label: string; motors: MotorId[]; tts: string; dis
   { label: "직진", motors: ["up"], tts: "현재 방향 그대로 직진하세요", dist: "66 m" },
   { label: "우회전", motors: ["right"], tts: "잠시 후 우회전하세요", dist: "16 m" },
   { label: "직진", motors: ["up"], tts: "현재 방향 그대로 직진하세요", dist: "90 m" },
-  { label: "우회전", motors: ["right"], tts: "잠시 후 우회전하세요", dist: "20 m" },
+  { label: "우회전", motors: ["right"], tts: "잠시 후 우회전하세요", dist: "잠시 후" },
   { label: "도착", motors: ["up", "down", "left", "right"], tts: "목적지 주변에 도착했습니다", dist: "18 m 이내" },
 ];
 
