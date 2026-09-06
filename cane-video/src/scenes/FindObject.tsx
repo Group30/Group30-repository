@@ -114,7 +114,7 @@ export const FindObject: React.FC<{ duration: number }> = ({ duration }) => {
       </Sequence>
 
       <Sequence from={EXPLAIN} durationInFrames={duration - EXPLAIN} name="실사: 물건 찾기">
-        <VideoCard src={clips.findObject.src} label={clips.findObject.label} note={clips.findObject.note} width={1500} x={(width - 1500) / 2} y={150} />
+        <VideoCard src={clips.findObject.src} label={clips.findObject.label} note={clips.findObject.note} width={1500} x={(width - 1500) / 2} y={150} volume={0.35} />
       </Sequence>
     </AbsoluteFill>
   );

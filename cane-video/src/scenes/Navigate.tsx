@@ -161,7 +161,7 @@ export const Navigate: React.FC<{ duration: number }> = ({ duration }) => {
         <VideoCard src={clips.obstacle.src} label={clips.obstacle.label} note={clips.obstacle.note} width={1500} x={(width - 1500) / 2} y={150} startFrom={75} />
       </Sequence>
       <Sequence from={EXPLAIN + OBST + CLIP1} durationInFrames={duration - EXPLAIN - OBST - CLIP1} name="실사: 길안내">
-        <VideoCard src={clips.navigate.src} label={clips.navigate.label} note={clips.navigate.note} width={1500} x={(width - 1500) / 2} y={150} startFrom={22 * 30} />
+        <VideoCard src={clips.navigate.src} label={clips.navigate.label} note={clips.navigate.note} width={1500} x={(width - 1500) / 2} y={150} startFrom={22 * 30} volume={0.35} />
       </Sequence>
     </AbsoluteFill>
   );

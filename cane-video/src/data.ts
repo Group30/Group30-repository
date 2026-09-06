@@ -126,12 +126,12 @@ export const appFunctions = [
 
 /** 타임라인 (초) — 총 90초 */
 export const timeline = {
-  intro: [0, 5],
-  reveal: [5, 9],
-  features: [9, 32],
-  findObject: [32, 55], // 설명 애니메이션 10s + 실사 13s
-  navigate: [55, 82], // 설명 10s + 장애물 4s + 실사 13s
-  outro: [82, 90],
+  intro: [0, 6],
+  reveal: [6, 9.5],
+  features: [9.5, 35],
+  findObject: [35, 57], // 설명 10s + 실사 12s
+  navigate: [57, 83], // 설명 10s + 장애물 4s + 실사 5s + 7s
+  outro: [83, 90],
 } as const;
 
 /** 실사 클립 (public/clips) — 초안 영상에서 잘라낸 구간 */
