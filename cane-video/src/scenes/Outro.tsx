@@ -44,6 +44,9 @@ export const Outro: React.FC<{ duration: number }> = ({ duration }) => {
       <div style={{ position: "absolute", right: 160, bottom: 130, width: 130, height: 130, border: `2px dashed ${theme.line}`, borderRadius: 12, display: "flex", alignItems: "center", justifyContent: "center", fontFamily: theme.mono, fontSize: 13, color: theme.grey, textAlign: "center", opacity: titleIn }}>
         QR /<br />로고 자리
       </div>
+      <div style={{ position: "absolute", left: 0, right: 0, bottom: 74, textAlign: "center", fontFamily: theme.mono, fontSize: 14, letterSpacing: 1, color: theme.grey, opacity: titleIn }}>
+        {product.musicCredit}
+      </div>
       <svg width={width} height={height} style={{ position: "absolute", inset: 0, opacity: 0.35 * titleIn }}>
         <circle cx={width / 2} cy={height / 2} r={interpolate(frame, [110, 300], [200, 900])} fill="none" stroke={theme.blue} strokeWidth={1} strokeDasharray="4 14" />
       </svg>

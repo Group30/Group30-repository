@@ -25,6 +25,7 @@ export const product = {
   contest: "[2026 시각장애인 지팡이 공모전] 출품작",
   version: "PROTOTYPE",
   caneImage: null as string | null, // public/cane.png 등 실제 제품 이미지 사용 시
+  musicCredit: "Music: “Life of Riley” by Kevin MacLeod (incompetech.com) · CC BY 4.0",
 };
 
 /** 하드웨어 콜아웃 — 설명서의 하드웨어 설계도 기준 */

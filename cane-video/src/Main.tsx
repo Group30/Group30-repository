@@ -3,6 +3,7 @@ import { AbsoluteFill, Audio, Sequence, staticFile, useVideoConfig } from "remot
 import { Background } from "./components/Background";
 import { HUD } from "./components/HUD";
 import { Subtitles } from "./components/Subtitles";
+import { Bgm } from "./components/Bgm";
 import { Intro } from "./scenes/Intro";
 import { CaneScene } from "./scenes/CaneScene";
 import { FindObject } from "./scenes/FindObject";
@@ -46,6 +47,7 @@ export const Main: React.FC = () => {
           <Audio src={staticFile(`vo/${n.id}.mp3`)} />
         </Sequence>
       ))}
+      <Bgm />
       <Subtitles />
       <HUD />
     </AbsoluteFill>

@@ -43,6 +43,11 @@ npm run still -- --frame=480   # 특정 프레임 스틸 확인
 - `src/components/Subtitles.tsx` 가 `narration.json` 의 `start`/`dur` 로 나레이션과 같은 타이밍에 하단 자막을 띄웁니다. 문장을 바꾸면 자막도 같이 바뀝니다.
 - `dur` 은 `scripts/make-vo.py` 가 mp3 길이를 재서 자동 기록합니다.
 
+## BGM
+
+- `public/bgm.mp3` — "Life of Riley" (Kevin MacLeod, incompetech.com, CC BY 4.0). 92초로 잘라 페이드 처리. 크레딧은 아웃트로 하단에 자동 표기(`product.musicCredit`).
+- `src/components/Bgm.tsx` 가 `narration.json` 구간에서 볼륨을 0.26 → 0.09 로 덕킹합니다. 곡을 바꾸려면 파일만 교체하고 `musicCredit` 문구를 고치면 됩니다.
+
 ## 자료 교체 포인트 (`src/data.ts` 한 파일)
 
 - `product` — 제품명 · 팀명 · 공모전명 · 단체명. `caneImage: "cane.png"` 로 바꾸고 `public/cane.png` 를 넣으면 SVG 대신 실제 제품 사진 사용(가로로 눕힌 이미지, 팁이 왼쪽 · 손잡이가 오른쪽).
@@ -79,6 +84,5 @@ public/
 ## 남은 작업 (자료 확보 후)
 
 - [ ] 실제 제품 사진(측면, 배경 제거) → `public/cane.png` + `features[].anchor` 미세 조정
-- [ ] BGM 트랙 (`public/bgm.mp3` → `Main.tsx` 에 `<Audio>` 한 줄)
 - [ ] 팀 로고 · QR (Outro 우하단 자리)
 - [ ] 공모전 공식 명칭 확인 (`product.contest`)
